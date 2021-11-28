@@ -8,6 +8,22 @@ extension KeyboardShortcuts.Name {
 	static let testShortcut4 = Self("testShortcut4")
 }
 
+// TODO: Replace this with `View#onChange` when macOS 11 is out.
+extension Binding {
+	func onChange(_ handler: @escaping (Value, Value) -> Void) -> Binding<Value> {
+		.init(
+			get: {
+				wrappedValue
+			},
+			set: {
+				let oldValue = wrappedValue
+				wrappedValue = $0
+				handler(oldValue, wrappedValue)
+			}
+		)
+	}
+}
+
 private struct DynamicShortcutRecorder: View {
 	@Binding var name: KeyboardShortcuts.Name
 	@Binding var isPressed: Bool
@@ -33,7 +49,7 @@ private struct DynamicShortcut: View {
 		Shortcut(id: "Shortcut4", name: .testShortcut4)
 	]
 
-	@State private var shortcut = Self.shortcuts.first!
+	@State private var shortcut = Self.shortcuts[0]
 	@State private var isPressed = false
 
 	var body: some View {
@@ -42,10 +58,9 @@ private struct DynamicShortcut: View {
 				.bold()
 				.padding(.bottom, 10)
 			VStack {
-				Picker("Select shortcut:", selection: $shortcut) {
+				Picker("Select shortcut:", selection: $shortcut.onChange(onShortcutChange)) {
 					ForEach(Self.shortcuts) {
-						Text($0.id)
-							.tag($0)
+						Text($0.id).tag($0)
 					}
 				}
 				Divider()
@@ -55,9 +70,6 @@ private struct DynamicShortcut: View {
 			.frame(maxWidth: 300)
 			.padding()
 			.padding(.bottom, 20)
-			.onChange(of: shortcut) { [oldValue = shortcut] in
-				onShortcutChange(oldValue: oldValue, newValue: $0)
-			}
 	}
 
 	private func onShortcutChange(oldValue: Shortcut, newValue: Shortcut) {

@@ -57,7 +57,7 @@ extension KeyboardShortcuts {
 		/// :nodoc:
 		override public var intrinsicContentSize: CGSize {
 			var size = super.intrinsicContentSize
-			size.width = minimumWidth
+			size.width = CGFloat(minimumWidth)
 			return size
 		}
 
@@ -91,7 +91,7 @@ extension KeyboardShortcuts {
 			self.translatesAutoresizingMaskIntoConstraints = false
 			setContentHuggingPriority(.defaultHigh, for: .vertical)
 			setContentHuggingPriority(.defaultHigh, for: .horizontal)
-			widthAnchor.constraint(greaterThanOrEqualToConstant: minimumWidth).isActive = true
+			widthAnchor.constraint(greaterThanOrEqualToConstant: CGFloat(minimumWidth)).isActive = true
 
 			// Hide the cancel button when not showing the shortcut so the placeholder text is properly centered. Must be last.
 			self.cancelButton = (cell as? NSSearchFieldCell)?.cancelButtonCell
@@ -168,7 +168,7 @@ extension KeyboardShortcuts {
 				}
 
 				let clickPoint = self.convert(event.locationInWindow, from: nil)
-				let clickMargin = 3.0
+				let clickMargin: CGFloat = 3
 
 				if
 					event.type == .leftMouseUp || event.type == .rightMouseUp,
