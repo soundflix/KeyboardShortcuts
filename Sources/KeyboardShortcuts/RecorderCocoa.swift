@@ -84,6 +84,7 @@ extension KeyboardShortcuts {
 			super.init(frame: .zero)
 			self.delegate = self
 			self.placeholderString = "record_shortcut".localized
+			self.centersPlaceholder = true
 			self.alignment = .center
 			(cell as? NSSearchFieldCell)?.searchButtonCell = nil
 

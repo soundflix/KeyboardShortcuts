@@ -30,8 +30,7 @@ enum CarbonKeyboardShortcuts {
 	private static var hotKeys = [Int: HotKey]()
 
 	// `SSKS` is just short for `Sindre Sorhus Keyboard Shortcuts`.
-	// Using an integer now that `UTGetOSTypeFromString("SSKS" as CFString)` is deprecated.
-	private static let hotKeySignature: UInt32 = 1397967699 // OSType => "SSKS"
+	private static let hotKeySignature = UTGetOSTypeFromString("SSKS" as CFString)
 
 	private static var hotKeyId = 0
 	private static var eventHandler: EventHandlerRef?
