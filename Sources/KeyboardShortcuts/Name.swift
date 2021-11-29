@@ -12,7 +12,7 @@ extension KeyboardShortcuts {
 	}
 	```
 	*/
-	public struct Name: Hashable, CaseIterable {
+	public struct Name: Hashable {
 		// This makes it possible to use `Shortcut` without the namespace.
 		/// :nodoc:
 		public typealias Shortcut = KeyboardShortcuts.Shortcut
