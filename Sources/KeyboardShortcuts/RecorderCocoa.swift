@@ -210,16 +210,23 @@ extension KeyboardShortcuts {
 					self.clear()
 					return nil
 				}
-
-				// The “shift” key is not allowed without other modifiers or a function key, since it doesn't actually work.
-				guard
-					!event.modifiers.subtracting(.shift).isEmpty
-						|| event.specialKey?.isFunctionKey == true,
-					let shortcut = Shortcut(event: event)
-				else {
+				
+				if !KeyboardShortcuts.allowSingleKeys {
+				// The “shift” key is not allowed without other modifiers or a function key, since it doesn't actually work.						   
+				if !(!event.modifiers.subtracting(.shift).isEmpty
+							|| event.specialKey?.isFunctionKey == true) {
+					print("not allowed: .shift without other modifiers or a function key")
 					NSSound.beep()
 					return nil
+				} else {
+					print("single keys allowed")	
 				}
+				}
+													   
+				guard let shortcut = Shortcut(event: event) else {
+					NSSound.beep()
+					return nil
+				}		
 
 				if let menuItem = shortcut.takenByMainMenu {
 					// TODO: Find a better way to make it possible to dismiss the alert by pressing "Enter". How can we make the input automatically temporarily lose focus while the alert is open?
