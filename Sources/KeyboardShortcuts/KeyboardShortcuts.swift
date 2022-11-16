@@ -331,3 +331,7 @@ public enum KeyboardShortcuts {
 extension Notification.Name {
 	static let shortcutByNameDidChange = Self("KeyboardShortcuts_shortcutByNameDidChange")
 }
+
+extension NSEvent.ModifierFlags {
+    public static var none: NSEvent.ModifierFlags { get { NSEvent.ModifierFlags(rawValue: 0) } } // Set if no modifier key is pressed.
+}
