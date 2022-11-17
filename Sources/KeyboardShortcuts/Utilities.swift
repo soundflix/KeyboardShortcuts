@@ -84,13 +84,20 @@ final class LocalEventMonitor {
 
 
 extension NSEvent {
-	static var modifiers: ModifierFlags {
-		modifierFlags
-			.intersection(.deviceIndependentFlagsMask)
-			// We remove `capsLock` as it shouldn't affect the modifiers.
-			// We remove `numericPad`/`function` as arrow keys trigger it, use `event.specialKeys` instead.
-			.subtracting([.capsLock, .numericPad, .function])
-	}
+    static var modifiers: ModifierFlags {
+        if KeyboardShortcuts.allowSingleKeys {
+            return modifierFlags
+                // We remove `capsLock` as it shouldn't affect the modifiers.
+                // We remove `numericPad`/`function` as arrow keys trigger it, use `event.specialKeys` instead.
+                .subtracting([.capsLock, .numericPad, .function])
+        } else {
+            return modifierFlags
+                .intersection(.deviceIndependentFlagsMask)
+                // We remove `capsLock` as it shouldn't affect the modifiers.
+                // We remove `numericPad`/`function` as arrow keys trigger it, use `event.specialKeys` instead.
+                .subtracting([.capsLock, .numericPad, .function])
+        }
+    }
 
 	/**
 	Real modifiers.
@@ -109,11 +116,18 @@ extension NSEvent {
 	```
 	*/
 	var modifiers: ModifierFlags {
-		modifierFlags
-			.intersection(.deviceIndependentFlagsMask)
-			// We remove `capsLock` as it shouldn't affect the modifiers.
-			// We remove `numericPad`/`function` as arrow keys trigger it, use `event.specialKeys` instead.
-			.subtracting([.capsLock, .numericPad, .function])
+        if KeyboardShortcuts.allowSingleKeys {
+            return modifierFlags
+                // We remove `capsLock` as it shouldn't affect the modifiers.
+                // We remove `numericPad`/`function` as arrow keys trigger it, use `event.specialKeys` instead.
+                .subtracting([.capsLock, .numericPad, .function])
+        } else {
+            return modifierFlags
+                .intersection(.deviceIndependentFlagsMask)
+                // We remove `capsLock` as it shouldn't affect the modifiers.
+                // We remove `numericPad`/`function` as arrow keys trigger it, use `event.specialKeys` instead.
+                .subtracting([.capsLock, .numericPad, .function])
+        }
 	}
 }
 
