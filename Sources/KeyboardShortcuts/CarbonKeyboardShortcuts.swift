@@ -79,6 +79,7 @@ enum CarbonKeyboardShortcuts {
 			registerError == noErr,
 			let carbonHotKey = eventHotKey
 		else {
+            print("RegisterEventHotKey Error:", registerError)
 			return
 		}
 

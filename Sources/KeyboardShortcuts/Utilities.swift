@@ -201,7 +201,7 @@ extension NSEvent.ModifierFlags {
 		if contains(.command) {
 			modifierFlags |= cmdKey
 		}
-
+        
 		return modifierFlags
 	}
 
