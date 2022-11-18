@@ -83,6 +83,13 @@ enum CarbonKeyboardShortcuts {
 			return
 		}
 
+        // registering [a-z,A-Z,1-9] without modifiers results in error -9868 (works in Playground)
+        // from: CarbonEventsCore.h
+        // /*
+        // * A generic error.
+        // */
+        // eventInternalErr              = -9868,
+        
 		hotKeys[hotKeyId] = HotKey(
 			shortcut: shortcut,
 			carbonHotKeyID: hotKeyId,
