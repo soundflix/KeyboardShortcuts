@@ -24,6 +24,10 @@ public enum KeyboardShortcuts {
 	/// Standard KeyboardShortcuts does not allow single keys or key with only shift.
 	public static var allowSingleKeys = false
 	
+	
+	/// Standard KeyboardShortcuts does not allow key used by the app's own menu hotkeys.
+	public static var allowUsedByOwnMenu = false
+	
 	private static func register(_ shortcut: Shortcut) {
 		guard !registeredShortcuts.contains(shortcut) else {
 			return
