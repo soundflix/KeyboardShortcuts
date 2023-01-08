@@ -228,6 +228,7 @@ extension KeyboardShortcuts {
 					return nil
 				}		
 
+				if !KeyboardShortcuts.allowUsedByOwnMenu {										   
 				if let menuItem = shortcut.takenByMainMenu {
 					// TODO: Find a better way to make it possible to dismiss the alert by pressing "Enter". How can we make the input automatically temporarily lose focus while the alert is open?
 					self.blur()
@@ -240,6 +241,7 @@ extension KeyboardShortcuts {
 					self.focus()
 
 					return nil
+				}
 				}
 
 				guard !shortcut.isTakenBySystem else {
