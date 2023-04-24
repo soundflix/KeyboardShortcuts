@@ -152,16 +152,16 @@ extension KeyboardShortcuts {
 		}
 
         /// :nodoc:
-                override public func viewDidMoveToWindow() {
-                    guard window != nil else {
-                        return
-                    }
-
-                    // Prevent the control from receiving the initial focus.
-                    DispatchQueue.main.async { [self] in
-                        canBecomeKey = true
-                    }
-                }
+        override public func viewDidMoveToWindow() {
+            guard window != nil else {
+                return
+            }
+            
+            // Prevent the control from receiving the initial focus.
+            DispatchQueue.main.async { [self] in
+                canBecomeKey = true
+            }
+        }
         
 		/// :nodoc:
 		override public func becomeFirstResponder() -> Bool {
