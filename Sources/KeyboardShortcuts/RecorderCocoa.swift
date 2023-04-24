@@ -88,7 +88,8 @@ extension KeyboardShortcuts {
 			self.centersPlaceholder = true
 			self.alignment = .center
 			(cell as? NSSearchFieldCell)?.searchButtonCell = nil
-
+            self.refusesFirstResponder = true
+            
 			self.wantsLayer = true
 			self.translatesAutoresizingMaskIntoConstraints = false
 			setContentHuggingPriority(.defaultHigh, for: .vertical)
@@ -154,12 +155,14 @@ extension KeyboardShortcuts {
         /// :nodoc:
         override public func viewDidMoveToWindow() {
             guard window != nil else {
+                self.refusesFirstResponder = true
                 return
             }
             
             // Prevent the control from receiving the initial focus.
             DispatchQueue.main.async { [self] in
                 canBecomeKey = true
+                self.refusesFirstResponder = false
             }
         }
         
