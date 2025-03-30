@@ -269,6 +269,10 @@ extension NSEvent.ModifierFlags: CustomStringConvertible {
 			description += "⌘"
 		}
 
+		if contains(.function) {
+			description += "fn" // alternative proposal: Unicode-Symbol "𝑓" (U+1D453)
+		}
+		
 		return description
 	}
 }
